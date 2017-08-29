@@ -1,0 +1,20 @@
+#if( $entity.hasCompositePrimaryKey() )
+#set( $entityKeyType = ${entity.name} + "EntityKey" )
+#else
+#set( $entityKeyType = ${entity.keyAttributes[0].formattedType(0)} )
+#end
+##--------------------------------------------------------------------------------------------------------
+package ${target.javaPackageFromFolder(${SRC})};
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import ${ENTITY_PKG}.${entity.name};
+#if ( $entity.hasCompositePrimaryKey() )
+import ${ENTITY_PKG}.${entityKeyType};
+#end
+
+/**
+ * Repository : ${entity.name}.
+ */
+public interface ${entity.name}Repository extends JpaRepository<${entity.name}, ${entityKeyType}> {
+
+}
